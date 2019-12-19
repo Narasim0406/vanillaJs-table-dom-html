@@ -1,7 +1,7 @@
 import "./styles.css";
 import moment from "moment";
 
-var datas = [
+var input = [
   {
     Organization: "Google",
     UserId: "akumar",
@@ -104,36 +104,30 @@ function generateTableHead(table, data) {
 
 function generateTable(table, data) {
   var list = [];
-  for (var a of data) {
-    // console.log(a);
+  for (var key of data) {
 
     let row = table.insertRow();
     var obj = {};
-    for (var dat of conf) {
+    for (var cf of conf) {
       let cell = row.insertCell();
       let text = "null";
-      let aa = dat.HeaderName;
-      obj[aa] = a[aa];
-      // Object.assign(obj, aaa);
-      // console.log(typeof a[aa], a[aa])
-      if (typeof a[aa] === "string") {
-        text = document.createTextNode(a[aa]);
+      let aa = cf.HeaderName;
+      obj[aa] = key[aa];
+      if (typeof key[aa] === "string") {
+        text = document.createTextNode(key[aa]);
       } else {
-        console.log("", typeof a[aa], a[aa]);
-        // var dates = dat.Column(a.CheckInTime);
-        var dates = dat.Column;
+        console.log("", typeof key[aa], key[aa]);
+        var dates = cf.Column;
         if (data.HeaderName === "Date") {
-          var sd = a.CheckInTime;
+          var dt = key.CheckInTime;
         } else {
-          sd = {
-            CheckInTime: a.CheckInTime,
-            CheckOutTime: a.CheckOutTime
+          dt = {
+            CheckInTime: key.CheckInTime,
+            CheckOutTime: key.CheckOutTime
           };
         }
 
-        var da = dates(sd);
-        // var strrr = dates.toString()
-        console.log("=========>", da);
+        var da = dates(dt);
         text = document.createTextNode(da);
       }
       cell.appendChild(text);
@@ -143,8 +137,7 @@ function generateTable(table, data) {
 }
 
 let table = document.querySelector("table");
-// let data = Object.keys(datas[0]);
-generateTable(table, datas);
+generateTable(table, input);
 generateTableHead(table, conf);
 
 // function getArg(data) {

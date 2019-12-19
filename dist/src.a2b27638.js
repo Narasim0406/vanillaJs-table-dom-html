@@ -4806,7 +4806,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-var datas = [{
+var input = [{
   Organization: "Google",
   UserId: "akumar",
   UserName: "Ashok Kumar",
@@ -4924,38 +4924,33 @@ function generateTable(table, data) {
 
   try {
     for (var _iterator2 = data[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-      var a = _step2.value;
-      // console.log(a);
+      var key = _step2.value;
       var row = table.insertRow();
       var obj = {};
 
       for (var _i = 0, _conf = conf; _i < _conf.length; _i++) {
-        var dat = _conf[_i];
+        var cf = _conf[_i];
         var cell = row.insertCell();
         var text = "null";
-        var aa = dat.HeaderName;
-        obj[aa] = a[aa]; // Object.assign(obj, aaa);
-        // console.log(typeof a[aa], a[aa])
+        var aa = cf.HeaderName;
+        obj[aa] = key[aa];
 
-        if (typeof a[aa] === "string") {
-          text = document.createTextNode(a[aa]);
+        if (typeof key[aa] === "string") {
+          text = document.createTextNode(key[aa]);
         } else {
-          console.log("", _typeof(a[aa]), a[aa]); // var dates = dat.Column(a.CheckInTime);
-
-          var dates = dat.Column;
+          console.log("", _typeof(key[aa]), key[aa]);
+          var dates = cf.Column;
 
           if (data.HeaderName === "Date") {
-            var sd = a.CheckInTime;
+            var dt = key.CheckInTime;
           } else {
-            sd = {
-              CheckInTime: a.CheckInTime,
-              CheckOutTime: a.CheckOutTime
+            dt = {
+              CheckInTime: key.CheckInTime,
+              CheckOutTime: key.CheckOutTime
             };
           }
 
-          var da = dates(sd); // var strrr = dates.toString()
-
-          console.log("=========>", da);
+          var da = dates(dt);
           text = document.createTextNode(da);
         }
 
@@ -4980,9 +4975,8 @@ function generateTable(table, data) {
   }
 }
 
-var table = document.querySelector("table"); // let data = Object.keys(datas[0]);
-
-generateTable(table, datas);
+var table = document.querySelector("table");
+generateTable(table, input);
 generateTableHead(table, conf); // function getArg(data) {
 //   var str = data.toString();
 //   var chars = str.split(")");
@@ -5035,7 +5029,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46207" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36093" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
